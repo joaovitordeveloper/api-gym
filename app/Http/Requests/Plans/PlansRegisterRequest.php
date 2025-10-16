@@ -22,9 +22,9 @@ class PlansRegisterRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'data.name' => 'required|string|min:5|max:50',
+            'data.name' => 'required|string|min:4|max:50',
             'data.value' => ['required', 'regex:/^\d+(\.\d{1,2})?$/'],
-            'data.limit_users' => 'required|integer',
+            'data.limit_users' => 'required|integer|min:1',
         ];
     }
 
@@ -44,6 +44,7 @@ class PlansRegisterRequest extends BaseRequest
 
             'data.limit_users.required' => 'O limite de usuários é obrigatório.',
             'data.limit_users.integer' => 'O limite de usuários deve ser um número inteiro.',
+            'data.limit_users.min' => 'O limite de usuários deve ser maior que zero.',
         ];
     }
 }
