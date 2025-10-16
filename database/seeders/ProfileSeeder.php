@@ -15,6 +15,10 @@ class ProfileSeeder extends Seeder
     public function run(): void
     {
         ModelsProfile::create([
+            'name' => 'Master'
+        ]);
+
+        ModelsProfile::create([
             'name' => 'Administrador'
         ]);
 
