@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Messages;
 use App\Http\Controllers\Controller;
 use App\Services\InstitutionsService;
 use App\Http\Requests\Institutions\InstitutionsRegisterRequest;
 
 class InstitutionsController extends Controller
 {
-    public function create(InstitutionsRegisterRequest $institutionsRegisterRequest, InstitutionsService $institutionsService)
+    protected InstitutionsService $institutionsService;
+
+    public function __construct(InstitutionsService $institutionsService)
+    {
+        $this->institutionsService = $institutionsService;
+    }
+
+    public function create(InstitutionsRegisterRequest $institutionsRegisterRequest)
     {
         try {
-            $institutionId = $institutionsService->register($institutionsRegisterRequest);
+            $institutionId = $this->institutionsService->register($institutionsRegisterRequest);
             $return = [
                 'institution_id' => $institutionId,
-                'message' => 'Intitution created successfully!'
+                'message' => Messages::success('Instituição')
             ];
 
             return $this->getResponseJson($return);

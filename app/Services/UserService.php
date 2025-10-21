@@ -17,16 +17,6 @@ use App\Http\Requests\User\UserRegisterRequest;
 class UserService extends BaseService
 {
     /**
-     * Method to return all user
-     *
-     * @return array
-     */
-    public function selectAll()
-    {
-        return User::all();
-    }
-
-    /**
      * Method for user creation
      *
      * @param UserRegisterRequest $data

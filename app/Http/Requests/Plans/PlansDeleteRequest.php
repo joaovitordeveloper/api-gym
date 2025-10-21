@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Plans;
 
+use Illuminate\Validation\Rule;
 use App\Http\Requests\BaseRequest;
 
 class PlansDeleteRequest extends BaseRequest
@@ -11,7 +12,7 @@ class PlansDeleteRequest extends BaseRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,14 @@ class PlansDeleteRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            //
+            'data.id' => ['required', 'integer', Rule::exists('plans', 'id'),]
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'data.id.exists' => 'O ID fornecido não existe.'
         ];
     }
 }

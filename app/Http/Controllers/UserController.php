@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Exception;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
@@ -20,7 +21,8 @@ class UserController extends Controller
     public function index(UserService $userService)
     {
         try {
-            $users = $userService->selectAll();
+            $userModel = new User();
+            $users = $userService->selectAll($userModel);
             $return = [
                 'users' => $users
             ];
